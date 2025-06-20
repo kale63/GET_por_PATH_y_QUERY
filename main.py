@@ -45,73 +45,63 @@ with open('COPIA_bdmodelos.csv', newline='', encoding='utf-8-sig') as file:
 
 @app.get("/alumnos/{matricula}")
 async def get_classmate(matricula: str):
-    for classmate in classmates_list:
-        if classmate.Matricula == matricula:
-            return classmate
-    return {"error": "Alumno no encontrado"}
+    filtered_classmates = filter(lambda c: c.Matricula == matricula, classmates_list)
+    result = list(filtered_classmates)
+    return result[0] if result else {"error": "Alumno no encontrado"}
 
 @app.get("/alumnos/edad/{edad}")
 async def get_classmates_by_age(edad: int):
-    filtered_classmates = [classmate for classmate in classmates_list if classmate.Edad == edad]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos con esa edad"}
+    filtered_classmates = filter(lambda c: c.Edad == edad, classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos con esa edad"}
 
 @app.get("/alumnos/nombre/{nombre}")
 async def get_classmates_by_name(nombre: str):
-    filtered_classmates = [classmate for classmate in classmates_list if nombre.lower() in classmate.Nombre.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos con ese nombre"}
+    filtered_classmates = filter(lambda c: nombre.lower() in c.Nombre.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos con ese nombre"}
 
 @app.get("/alumnos/genero/{genero}")
 async def get_classmates_by_gender(genero: str):
-    filtered_classmates = [classmate for classmate in classmates_list if classmate.Genero.lower() == genero.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos con ese género"}
+    filtered_classmates = filter(lambda c: c.Genero.lower() == genero.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos con ese género"}
 
 @app.get("/alumnos/semestre/{semestre}")
 async def get_classmates_by_semester(semestre: int):
-    filtered_classmates = [classmate for classmate in classmates_list if classmate.Semestre == semestre]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos en ese semestre"}
+    filtered_classmates = filter(lambda c: c.Semestre == semestre, classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos en ese semestre"}
 
 @app.get("/alumnos/trabajo/{trabajo}")
 async def get_classmates_by_job(trabajo: str):
-    filtered_classmates = [classmate for classmate in classmates_list if classmate.Trabajo.lower() == trabajo.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos que coincidan con esa situacion laboral"}
+    filtered_classmates = filter(lambda c: c.Trabajo.lower() == trabajo.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos que coincidan con esa situación laboral"}
 
 @app.get("/alumnos/estado/{estado}")
 async def get_classmates_by_state(estado: str):
-    filtered_classmates = [classmate for classmate in classmates_list if classmate.Estado.lower() == estado.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos que vengan de ese estado"}
+    filtered_classmates = filter(lambda c: c.Estado.lower() == estado.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos que vengan de ese estado"}
 
 @app.get("/alumnos/carrera/{carrera}")
 async def get_classmates_by_career(carrera: str):
-    filtered_classmates = [classmate for classmate in classmates_list if classmate.Carrera.lower() == carrera.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos en esa carrera"}
+    filtered_classmates = filter(lambda c: c.Carrera.lower() == carrera.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos en esa carrera"}
 
 @app.get("/alumnos/hobby/{hobby}")
 async def get_classmates_by_hobby(hobby: str):
-    filtered_classmates = [classmate for classmate in classmates_list if hobby.lower() in classmate.Hobby.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos con ese hobby"}
+    filtered_classmates = filter(lambda c: hobby.lower() in c.Hobby.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos con ese hobby"}
 
 @app.get("/alumnos/preferencia/{preferencia}")
 async def get_classmates_by_preference(preferencia: str):
-    filtered_classmates = [classmate for classmate in classmates_list if preferencia.lower() in classmate.Preferencia.lower()]
-    if filtered_classmates:
-        return filtered_classmates
-    return {"error": "No se encontraron alumnos con esa preferencia"}
+    filtered_classmates = filter(lambda c: preferencia.lower() in c.Preferencia.lower(), classmates_list)
+    result = list(filtered_classmates)
+    return result if result else {"error": "No se encontraron alumnos con esa preferencia"}
 
 # Actividad 2: Endpoints por query
 
