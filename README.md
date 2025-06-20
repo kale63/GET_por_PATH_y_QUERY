@@ -1,0 +1,1 @@
+# GET_por_PATH_y_QUERY
